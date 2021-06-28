@@ -15,14 +15,14 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rb-forms", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/splat", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
 // Define API routes here
-// const routes = require("./routes");
-// app.use(routes);
+const routes = require("./routes");
+app.use(routes);
 
 // Send every request to the React app
 // Define any API routes before this runs
