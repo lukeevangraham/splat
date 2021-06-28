@@ -18,4 +18,12 @@ module.exports = {
       alert(e);
     }
   },
+  findOne: async (req, res) => {
+    try {
+      const dbProject = await db.Project.findOne({ _id: req.params.id });
+      res.json(dbProject);
+    } catch (e) {
+      alert(e);
+    }
+  },
 };

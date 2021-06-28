@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addProject, getProjects } from "../../store/actions";
 
@@ -17,8 +18,8 @@ const Projects = ({ addProject, getProjects, projects }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     addProject({ name: newProjectName });
-    setNewProjectName("")
-    setCreatingProject(false)
+    setNewProjectName("");
+    setCreatingProject(false);
   };
 
   let createProject = (
@@ -36,10 +37,10 @@ const Projects = ({ addProject, getProjects, projects }) => {
 
   return (
     <div className="bg-red-400 w-9/12 grid grid-cols-2 p-3">
-      <div className="text-4xl">Projects</div>
+      <div className="text-4xl mb-4">Projects</div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 col-start-2 justify-self-end self-center"
+        className="h-6 w-6  mb-4 col-start-2 justify-self-end self-center"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -54,10 +55,11 @@ const Projects = ({ addProject, getProjects, projects }) => {
       </svg>
       {creatingProject ? createProject : null}
       <ul>
-        {console.log("projects: ", projects)}
         {projects.length > 0
           ? projects.map((project, index) => (
-              <li key={index}>{project.name}</li>
+              <li key={project._id}>
+                <Link to={`/project/${project._id}`}>{project.name}</Link>
+              </li>
             ))
           : null}
       </ul>
