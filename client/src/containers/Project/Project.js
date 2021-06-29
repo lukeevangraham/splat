@@ -1,15 +1,17 @@
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
-import { fetchProject } from "../../store/actions/project";
+import { getProject } from "../../store/actions/project";
+import IssueColumns from "../../components/IssueColumns/IssueColumns";
 
-const Project = ({ match, fetchProject, currentProject }) => {
+const Project = ({ match, getProject, currentProject }) => {
   useEffect(() => {
-    fetchProject(match.params.id);
-  }, [fetchProject]);
+    getProject(match.params.id);
+  }, [getProject]);
 
   return (
     <div>
       <div>{currentProject.name}</div>
+      <IssueColumns project={currentProject} />
     </div>
   );
 };
@@ -20,4 +22,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchProject })(Project);
+export default connect(mapStateToProps, { getProject })(Project);

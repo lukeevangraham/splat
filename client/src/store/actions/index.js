@@ -1,1 +1,1 @@
-export { addProject, getProjects, fetchProject } from "./project";
+export { addProject, getProjects, getProject, addIssue } from "./project";
