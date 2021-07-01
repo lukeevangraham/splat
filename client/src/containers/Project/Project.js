@@ -6,7 +6,7 @@ import IssueColumns from "../../components/IssueColumns/IssueColumns";
 const Project = ({ match, getProject, currentProject }) => {
   useEffect(() => {
     getProject(match.params.id);
-  }, [getProject]);
+  }, [getProject, match.params.id]);
 
   return (
     <div>

@@ -25,11 +25,14 @@ export const getProject = (id) => async (dispatch) => {
 
 
 export const addIssue = (issueData) => async (dispatch) => {
-  console.log("[action]:", issueData)
+  // console.log("[action]:", issueData)
   const response = await axios.post("/api/issue", issueData)
+
+  // console.log("actionRES:", response)
 
   dispatch({
       type: actionTypes.ADD_ISSUE,
       payload: response.data
   })
+  // dispatch({ type: actionTypes.GET_PROJECT, payload })
 }

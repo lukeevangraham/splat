@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addIssue } from "../../../store/actions/project";
 
-const IssueColumn = ({ name, addIssue, projectId }) => {
+const IssueColumn = ({ name, addIssue, project, issues }) => {
   let [inputtingNewIssue, setInputtingNewIssue] = useState(false);
   let [newIssueSummary, setNewIssueSummary] = useState("");
 
@@ -12,7 +12,11 @@ const IssueColumn = ({ name, addIssue, projectId }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addIssue({ summary: newIssueSummary, status: name, projectId });
+    addIssue({
+      summary: newIssueSummary,
+      status: name,
+      projectId: project._id,
+    });
     setNewIssueSummary("");
     setInputtingNewIssue(false);
   };
@@ -20,6 +24,15 @@ const IssueColumn = ({ name, addIssue, projectId }) => {
   return (
     <div className="bg-gray-200 p-3">
       <div className="text-lg font-semibold">{name}</div>
+      <ul>
+        {issues
+          ? issues.map((issue) =>
+              issue.status === name ? (
+                <li key={issue._id}>{issue.summary}</li>
+              ) : null
+            )
+          : null}
+      </ul>
       {inputtingNewIssue ? (
         <form onSubmit={onSubmit}>
           <input

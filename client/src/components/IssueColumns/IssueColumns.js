@@ -3,10 +3,14 @@ import IssueColumn from "./IssueColumn/IssueColumn";
 
 const IssueColumns = ({ project }) => (
   <div className="w-11/12 grid grid-cols-3 gap-4 mx-auto">
-  {console.log("PROJECT: ", project)}
-    <IssueColumn name="To do" projectId={project._id} />
-    <IssueColumn name="Doing" projectId={project._id} />
-    <IssueColumn name="Done" projectId={project._id} />
+    {console.log("PROJECT: ", project)}
+    <IssueColumn
+      name="To do"
+      project={project}
+      issues={project.issues.filter((issue) => issue.status === "To do")}
+    />
+    <IssueColumn name="Doing" project={project} issues={project.issues.filter((issue) => issue.status === "Doing")} />
+    <IssueColumn name="Done" project={project} issues={project.issues.filter((issue) => issue.status === "Done")} />
   </div>
 );
 

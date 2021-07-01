@@ -20,7 +20,7 @@ module.exports = {
   },
   findOne: async (req, res) => {
     try {
-      const dbProject = await db.Project.findOne({ _id: req.params.id });
+      const dbProject = await db.Project.findOne({ _id: req.params.id }).populate("issues");
       res.json(dbProject);
     } catch (e) {
       alert(e);
