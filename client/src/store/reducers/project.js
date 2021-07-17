@@ -37,13 +37,19 @@ const projectReducer = (state = initialState, action) => {
     case actionTypes.GET_PROJECTS:
       return { ...state, projects: action.payload };
     case actionTypes.GET_PROJECT:
-      const objectOfIssues = action.payload.issues.reduce(
-        (result, item, index, array) => {
-          result[item._id] = item;
-          return result;
-        }
-      );
-      console.log("HERE: ", objectOfIssues);
+      const convertArrayToObject = (array, key) =>
+        array.reduce(
+          (obj, item) => ({
+            ...obj,
+            [item[key]]: item,
+          }),
+          {}
+        );
+
+      const objectOfIssues = convertArrayToObject(action.payload.issues, "_id");
+
+      console.log("ISSUES: ", objectOfIssues)
+
       return {
         ...state,
         currentProject: action.payload,
