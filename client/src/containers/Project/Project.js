@@ -13,7 +13,33 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
-    console.log("RES: ", result);
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const start = data.columns[source.droppableId];
+    const finish = data.columns[destination.droppableId];
+
+    if (start === finish) {
+      const newIssueIds = Array.from(start.issueIds);
+      newIssueIds.splice(source.index, 1);
+      newTaskIds.splice(destination.index, 0, draggableId);
+
+      const newColumn = {
+        ...start,
+        issueIds: newIssueIds,
+      }
+
+      const 
+      
+    }
   };
 
   return (
