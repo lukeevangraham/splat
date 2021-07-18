@@ -48,12 +48,37 @@ const projectReducer = (state = initialState, action) => {
 
       const objectOfIssues = convertArrayToObject(action.payload.issues, "_id");
 
-      console.log("ISSUES: ", objectOfIssues)
+      let toDoCol = [];
+      let doingCol = [];
+      let doneCol = [];
+
+      action.payload.issues.forEach((issue) => {
+        switch (issue.status) {
+          case "To do":
+            toDoCol.push(issue._id);
+            break;
+          case "Doing":
+            doingCol.push(issue._id);
+            break;
+          case "Done":
+            doneCol.push(issue._id);
+            break;
+          default:
+            break;
+        }
+      });
 
       return {
         ...state,
         currentProject: action.payload,
         issues: objectOfIssues,
+        columns: {
+          ...state.columns,
+          ["column-1"]: {
+            ...state.columns["column-1"],
+            issueIds: toDoCol,
+          },
+        },
       };
     case actionTypes.ADD_ISSUE:
       return {

@@ -32,6 +32,7 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
 };
 
 const mapStateToProps = (state) => {
+
   return {
     currentProject: state.project.currentProject,
     beautifulDNDData: {
