@@ -78,6 +78,14 @@ const projectReducer = (state = initialState, action) => {
             ...state.columns["column-1"],
             issueIds: toDoCol,
           },
+          ["column-2"]: {
+            ...state.columns["column-2"],
+            issueIds: doingCol,
+          },
+          ["column-3"]: {
+            ...state.columns["column-3"],
+            issueIds: doneCol,
+          },
         },
       };
     case actionTypes.ADD_ISSUE:

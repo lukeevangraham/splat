@@ -10,10 +10,16 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
     getProject(match.params.id);
   }, [getProject, match.params.id]);
 
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    console.log("RES: ", result);
+  };
+
   return (
     <div>
       <div>{currentProject.name}</div>
-      <DragDropContext>
+      <DragDropContext onDragEnd={onDragEnd}>
         {beautifulDNDData.columnOrder.map((columnId) => {
           const column = beautifulDNDData.columns[columnId];
           console.log("BDND: ", beautifulDNDData);
@@ -21,9 +27,7 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
             (issueId) => beautifulDNDData.issues[issueId]
           );
 
-          return (
-            <Column key={column._id} column={column} issues={issues} />
-          );
+          return <Column key={column._id} column={column} issues={issues} />;
         })}
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}
@@ -32,7 +36,6 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
 };
 
 const mapStateToProps = (state) => {
-
   return {
     currentProject: state.project.currentProject,
     beautifulDNDData: {
