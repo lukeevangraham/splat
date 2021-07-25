@@ -4,6 +4,7 @@ const issueController = require("../../controllers/issueController")
 
 // Matches with "/project"
 router.route("/").post(issueController.post)
+router.put("/:id", issueController.update)
 // router.route("/").post(projectController.post).get(projectController.get);
 // router.route("/:id").get(projectController.findOne)
 
