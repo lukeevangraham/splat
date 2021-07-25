@@ -23,6 +23,14 @@ export const getProject = (id) => async (dispatch) => {
   dispatch({ type: actionTypes.GET_PROJECT, payload: response.data });
 };
 
+export const sameColUpdate = (colData) => async (dispatch) => {
+  dispatch({ type: actionTypes.SAME_COL_UPDATE, payload: colData })
+}
+
+export const diffColUpdate = (newStart, newFinish) => async (dispatch) => {
+  dispatch({ type: actionTypes.DIF_COL_UPDATE, payload: { newStart, newFinish } })
+}
+
 
 export const addIssue = (issueData) => async (dispatch) => {
   // console.log("[action]:", issueData)

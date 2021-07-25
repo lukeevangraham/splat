@@ -96,6 +96,24 @@ const projectReducer = (state = initialState, action) => {
           issues: action.payload.issues,
         },
       };
+    case actionTypes.SAME_COL_UPDATE:
+      return {
+        ...state,
+        columns: {
+          ...state.columns,
+          [action.payload.id]: action.payload,
+        },
+      };
+    case actionTypes.DIF_COL_UPDATE:
+      console.log("HERE: ", action.payload);
+      return {
+        ...state,
+        columns: {
+          ...state.columns,
+          [action.payload.newStart.id]: action.payload.newStart,
+          [action.payload.newFinish.id]: action.payload.newFinish,
+        },
+      };
     default:
       return state;
   }

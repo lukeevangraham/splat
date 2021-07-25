@@ -1,11 +1,22 @@
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { getProject } from "../../store/actions/project";
+import {
+  getProject,
+  sameColUpdate,
+  diffColUpdate,
+} from "../../store/actions/project";
 // import IssueColumns from "../../components/IssueColumns/IssueColumns";
 import Column from "../../components/Column/Column";
 
-const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
+const Project = ({
+  match,
+  getProject,
+  sameColUpdate,
+  diffColUpdate,
+  currentProject,
+  beautifulDNDData,
+}) => {
   useEffect(() => {
     getProject(match.params.id);
   }, [getProject, match.params.id]);
@@ -24,22 +35,40 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
       return;
     }
 
-    const start = data.columns[source.droppableId];
-    const finish = data.columns[destination.droppableId];
+    const start = beautifulDNDData.columns[source.droppableId];
+    const finish = beautifulDNDData.columns[destination.droppableId];
 
+    // Moving within the same list
     if (start === finish) {
       const newIssueIds = Array.from(start.issueIds);
       newIssueIds.splice(source.index, 1);
-      newTaskIds.splice(destination.index, 0, draggableId);
+      newIssueIds.splice(destination.index, 0, draggableId);
 
       const newColumn = {
         ...start,
         issueIds: newIssueIds,
-      }
+      };
 
-      const 
-      
+      sameColUpdate(newColumn);
     }
+
+    // Moving from one list to another
+    const startIssueIds = Array.from(start.issueIds);
+
+    startIssueIds.splice(source.index, 1);
+    const newStart = {
+      ...start,
+      issueIds: startIssueIds,
+    };
+
+    const finishIssueIds = Array.from(finish.issueIds);
+    finishIssueIds.splice(destination.index, 0, draggableId);
+    const newFinish = {
+      ...finish,
+      issueIds: finishIssueIds,
+    };
+
+    diffColUpdate(newStart, newFinish);
   };
 
   return (
@@ -48,12 +77,11 @@ const Project = ({ match, getProject, currentProject, beautifulDNDData }) => {
       <DragDropContext onDragEnd={onDragEnd}>
         {beautifulDNDData.columnOrder.map((columnId) => {
           const column = beautifulDNDData.columns[columnId];
-          console.log("BDND: ", beautifulDNDData);
           const issues = column.issueIds.map(
             (issueId) => beautifulDNDData.issues[issueId]
           );
 
-          return <Column key={column._id} column={column} issues={issues} />;
+          return <Column key={column.id} column={column} issues={issues} />;
         })}
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}
@@ -72,4 +100,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getProject })(Project);
+export default connect(mapStateToProps, {
+  getProject,
+  sameColUpdate,
+  diffColUpdate,
+})(Project);

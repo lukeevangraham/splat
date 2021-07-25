@@ -8,7 +8,7 @@ const Issue = ({ issue, index }) => (
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
-        isDragging={snapshot.isDragging}
+        isdragging={snapshot.isDragging.toString()}
       >
         {issue.summary}
       </div>
