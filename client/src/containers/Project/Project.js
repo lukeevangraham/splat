@@ -81,7 +81,7 @@ const Project = ({
             (issueId) => beautifulDNDData.issues[issueId]
           );
 
-          return <Column key={column.id} column={column} issues={issues} />;
+          return <Column key={column.id} column={column} issues={issues} projectId={currentProject._id} />;
         })}
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}

@@ -11,9 +11,12 @@ const ProjectSchema = new Schema({
   issues: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Issue"
-    }
-  ]
+      ref: "Issue",
+    },
+  ],
+  column1Ids: [{ type: Schema.Types.ObjectId, ref: "Issue" }],
+  column2Ids: [{ type: Schema.Types.ObjectId, ref: "Issue" }],
+  column3Ids: [{ type: Schema.Types.ObjectId, ref: "Issue" }],
 });
 
 const Project = mongoose.model("Project", ProjectSchema);

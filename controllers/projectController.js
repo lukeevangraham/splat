@@ -20,10 +20,13 @@ module.exports = {
   },
   findOne: async (req, res) => {
     try {
-      const dbProject = await db.Project.findOne({ _id: req.params.id }).populate("issues");
+      const dbProject = await db.Project.findOne({
+        _id: req.params.id,
+      }).populate("column1Ids").populate("column2Ids").populate("column3Ids");
+      console.log("PROJECT: ", dbProject)
       res.json(dbProject);
     } catch (e) {
-      alert(e);
+      console.log("[projController]", e);
     }
   },
 };

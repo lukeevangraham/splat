@@ -12,7 +12,6 @@ const IssueSchema = new Schema({
   description: String,
   status: {
     type: String,
-    required: "Status is required",
   },
   priority: Number,
   teammates: Array,

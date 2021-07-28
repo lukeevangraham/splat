@@ -34,11 +34,8 @@ export const diffColUpdate = (newStart, newFinish) => async (dispatch) => {
   });
 };
 
-export const addIssue = (issueData) => async (dispatch) => {
-  // console.log("[action]:", issueData)
-  const response = await axios.post("/api/issue", issueData);
-
-  // console.log("actionRES:", response)
+export const addIssue = (issueData, column) => async (dispatch) => {
+  const response = await axios.post("/api/issue", { issueData, column});
 
   dispatch({
     type: actionTypes.ADD_ISSUE,
