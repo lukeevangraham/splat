@@ -108,11 +108,19 @@ const projectReducer = (state = initialState, action) => {
           },
           ["column-3"]: {
             ...state.columns["column-3"],
-            issueIds: sortedProjectAfterIssueAdded.doingCol,
+            issueIds: sortedProjectAfterIssueAdded.doneCol,
           },
         },
       };
     case actionTypes.SAME_COL_UPDATE:
+      // console.log("[REDUCER Same COL]: ", action.payload);
+      // console.log("RETURNING: ", {
+      //   ...state,
+      //   columns: {
+      //     ...state.columns,
+      //     [action.payload.id]: action.payload,
+      //   },
+      // });
       return {
         ...state,
         columns: {
@@ -121,7 +129,6 @@ const projectReducer = (state = initialState, action) => {
         },
       };
     case actionTypes.DIF_COL_UPDATE:
-      console.log("HERE: ", action.payload);
       return {
         ...state,
         columns: {

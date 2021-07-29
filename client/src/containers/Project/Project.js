@@ -73,6 +73,7 @@ const Project = ({
 
   return (
     <div>
+      {console.log("BDnD Data: ", beautifulDNDData)}
       <div>{currentProject.name}</div>
       <DragDropContext onDragEnd={onDragEnd}>
         {beautifulDNDData.columnOrder.map((columnId) => {
@@ -81,7 +82,14 @@ const Project = ({
             (issueId) => beautifulDNDData.issues[issueId]
           );
 
-          return <Column key={column.id} column={column} issues={issues} projectId={currentProject._id} />;
+          return (
+            <Column
+              key={column.id}
+              column={column}
+              issues={issues}
+              projectId={currentProject._id}
+            />
+          );
         })}
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}
@@ -90,11 +98,17 @@ const Project = ({
 };
 
 const mapStateToProps = (state) => {
+  const editedColumns = {
+    "column-1": state.project.columns["column-1"],
+    "column-2": state.project.columns["column-2"],
+    "column-3": state.project.columns["column-3"],
+  };
+  console.log("HERE", editedColumns);
   return {
     currentProject: state.project.currentProject,
     beautifulDNDData: {
       issues: state.project.issues,
-      columns: state.project.columns,
+      columns: editedColumns,
       columnOrder: state.project.columnOrder,
     },
   };

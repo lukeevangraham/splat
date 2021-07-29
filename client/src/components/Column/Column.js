@@ -32,7 +32,6 @@ const Column = ({ column, issues, projectId, addIssue }) => {
             {...provided.droppableProps}
             className="p-2"
           >
-            {console.log("ISSUE: ", issues)}
             {issues.map((issue, index) => (
               <Issue key={issue._id} issue={issue} index={index} />
             ))}
