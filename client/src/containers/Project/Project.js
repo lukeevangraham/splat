@@ -50,6 +50,7 @@ const Project = ({
       };
 
       sameColUpdate(newColumn);
+      return;
     }
 
     // Moving from one list to another

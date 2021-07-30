@@ -3,12 +3,11 @@ import { Draggable } from "react-beautiful-dnd";
 
 const Issue = ({ issue, index }) => (
   <Draggable draggableId={issue._id} index={index}>
-    {(provided, snapshot) => (
+    {(provided) => (
       <div
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
-        isdragging={snapshot.isDragging.toString()}
       >
         {issue.summary}
       </div>
