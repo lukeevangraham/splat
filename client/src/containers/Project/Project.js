@@ -74,24 +74,25 @@ const Project = ({
 
   return (
     <div>
-      {console.log("BDnD Data: ", beautifulDNDData)}
       <div>{currentProject.name}</div>
       <DragDropContext onDragEnd={onDragEnd}>
-        {beautifulDNDData.columnOrder.map((columnId) => {
-          const column = beautifulDNDData.columns[columnId];
-          const issues = column.issueIds.map(
-            (issueId) => beautifulDNDData.issues[issueId]
-          );
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, 350px)" }}>
+          {beautifulDNDData.columnOrder.map((columnId) => {
+            const column = beautifulDNDData.columns[columnId];
+            const issues = column.issueIds.map(
+              (issueId) => beautifulDNDData.issues[issueId]
+            );
 
-          return (
-            <Column
-              key={column.id}
-              column={column}
-              issues={issues}
-              projectId={currentProject._id}
-            />
-          );
-        })}
+            return (
+              <Column
+                key={column.id}
+                column={column}
+                issues={issues}
+                projectId={currentProject._id}
+              />
+            );
+          })}
+        </div>
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}
     </div>
