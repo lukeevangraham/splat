@@ -51,7 +51,7 @@ const Column = ({ column, issues, projectId, addIssue }) => {
                 </div>
               </form>
             ) : (
-              <div onClick={() => setInputtingNewIssue(true)}>
+              <div className="mt-4" onClick={() => setInputtingNewIssue(true)}>
                 Add another issue
               </div>
             )}

@@ -3,6 +3,6 @@ const projectController = require("../../controllers/projectController");
 
 // Matches with "/project"
 router.route("/").post(projectController.post).get(projectController.get);
-router.route("/:id").get(projectController.findOne)
+router.route("/:id").get(projectController.findOne).put(projectController.put);
 
 module.exports = router;

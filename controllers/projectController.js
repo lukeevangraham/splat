@@ -22,11 +22,28 @@ module.exports = {
     try {
       const dbProject = await db.Project.findOne({
         _id: req.params.id,
-      }).populate("column1Ids").populate("column2Ids").populate("column3Ids");
-      console.log("PROJECT: ", dbProject)
+      })
+        .populate("column1Ids")
+        .populate("column2Ids")
+        .populate("column3Ids");
       res.json(dbProject);
     } catch (e) {
       console.log("[projController]", e);
+    }
+  },
+  put: async (req, res) => {
+    try {
+      console.log("[projController]: ", `column${req.body.id.substr(-1)}Ids`);
+      const dbProject = await db.Project.findOneAndUpdate(
+        {
+          _id: req.params.id,
+        },
+        { $set: { [`column${req.body.id.substr(-1)}Ids`]: req.body.issueIds } },
+        { new: true }
+      );
+      res.json(dbProject);
+    } catch (e) {
+      console.log("[projController]: ", e);
     }
   },
 };

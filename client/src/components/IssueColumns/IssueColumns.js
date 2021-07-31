@@ -3,7 +3,6 @@ import IssueColumn from "./IssueColumn/IssueColumn";
 
 const IssueColumns = ({ project }) => (
   <div className="w-11/12 grid grid-cols-3 gap-4 mx-auto">
-    {console.log("PROJECT: ", project)}
     <IssueColumn
       name="To do"
       project={project}

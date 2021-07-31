@@ -49,7 +49,7 @@ const Project = ({
         issueIds: newIssueIds,
       };
 
-      sameColUpdate(newColumn);
+      sameColUpdate(newColumn, match.params.id);
       return;
     }
 
@@ -100,17 +100,17 @@ const Project = ({
 };
 
 const mapStateToProps = (state) => {
-  const editedColumns = {
-    "column-1": state.project.columns["column-1"],
-    "column-2": state.project.columns["column-2"],
-    "column-3": state.project.columns["column-3"],
-  };
-  console.log("HERE", editedColumns);
+  // const editedColumns = {
+  //   "column-1": state.project.columns["column-1"],
+  //   "column-2": state.project.columns["column-2"],
+  //   "column-3": state.project.columns["column-3"],
+  // };
+  // console.log("HERE", editedColumns);
   return {
     currentProject: state.project.currentProject,
     beautifulDNDData: {
       issues: state.project.issues,
-      columns: editedColumns,
+      columns: state.project.columns,
       columnOrder: state.project.columnOrder,
     },
   };

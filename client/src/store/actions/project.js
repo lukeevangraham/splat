@@ -17,17 +17,20 @@ export const getProjects = () => async (dispatch) => {
 };
 
 export const getProject = (id) => async (dispatch) => {
-  console.log("getting project!");
   const response = await axios.get(`/api/project/${id}`);
 
   dispatch({ type: actionTypes.GET_PROJECT, payload: response.data });
 };
 
-export const sameColUpdate = (colData) => async (dispatch) => {
+export const sameColUpdate = (colData, id) => async (dispatch) => {
+  // const responseCol = await axios.put(`/api/project/${id}`, colData);
+  axios.put(`/api/project/${id}`, colData);
+  // console.log("RES: ", response)
   dispatch({ type: actionTypes.SAME_COL_UPDATE, payload: colData });
 };
 
 export const diffColUpdate = (newStart, newFinish) => async (dispatch) => {
+  console.log("newStart & finish: ", newStart, newFinish);
   dispatch({
     type: actionTypes.DIF_COL_UPDATE,
     payload: { newStart, newFinish },
@@ -35,7 +38,7 @@ export const diffColUpdate = (newStart, newFinish) => async (dispatch) => {
 };
 
 export const addIssue = (issueData, column) => async (dispatch) => {
-  const response = await axios.post("/api/issue", { issueData, column});
+  const response = await axios.post("/api/issue", { issueData, column });
 
   dispatch({
     type: actionTypes.ADD_ISSUE,
