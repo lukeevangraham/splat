@@ -25,12 +25,11 @@ export const getProject = (id) => async (dispatch) => {
 export const sameColUpdate = (colData, id) => async (dispatch) => {
   // const responseCol = await axios.put(`/api/project/${id}`, colData);
   axios.put(`/api/project/${id}`, colData);
-  // console.log("RES: ", response)
   dispatch({ type: actionTypes.SAME_COL_UPDATE, payload: colData });
 };
 
-export const diffColUpdate = (newStart, newFinish) => async (dispatch) => {
-  console.log("newStart & finish: ", newStart, newFinish);
+export const diffColUpdate = (newStart, newFinish, id) => async (dispatch) => {
+  axios.put(`/api/project/${id}`, { newStart: newStart, newFinish: newFinish });
   dispatch({
     type: actionTypes.DIF_COL_UPDATE,
     payload: { newStart, newFinish },

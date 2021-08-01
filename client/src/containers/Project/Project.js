@@ -69,14 +69,19 @@ const Project = ({
       issueIds: finishIssueIds,
     };
 
-    diffColUpdate(newStart, newFinish);
+    diffColUpdate(newStart, newFinish, match.params.id);
   };
 
   return (
     <div>
       <div>{currentProject.name}</div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, 350px)" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, 350px)",
+          }}
+        >
           {beautifulDNDData.columnOrder.map((columnId) => {
             const column = beautifulDNDData.columns[columnId];
             const issues = column.issueIds.map(
@@ -100,12 +105,6 @@ const Project = ({
 };
 
 const mapStateToProps = (state) => {
-  // const editedColumns = {
-  //   "column-1": state.project.columns["column-1"],
-  //   "column-2": state.project.columns["column-2"],
-  //   "column-3": state.project.columns["column-3"],
-  // };
-  // console.log("HERE", editedColumns);
   return {
     currentProject: state.project.currentProject,
     beautifulDNDData: {

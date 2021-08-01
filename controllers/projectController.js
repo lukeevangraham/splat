@@ -3,7 +3,6 @@ const db = require("../models");
 module.exports = {
   post: async (req, res) => {
     try {
-      console.log("[proectController] BODY: ", req.body);
       const dbProject = await db.Project.create(req.body);
       res.json(dbProject);
     } catch (e) {
@@ -33,7 +32,28 @@ module.exports = {
   },
   put: async (req, res) => {
     try {
-      console.log("[projController]: ", `column${req.body.id.substr(-1)}Ids`);
+      // determine if this a move between DND Columns
+      if (req.body.newStart) {
+        const dbProject = await db.Project.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            $set: {
+              [`column${req.body.newStart.id.substr(-1)}Ids`]:
+                req.body.newStart.issueIds,
+              [`column${req.body.newFinish.id.substr(-1)}Ids`]:
+                req.body.newFinish.issueIds,
+            },
+          },
+          { new: true }
+        );
+        res.json(dbProject);
+
+        return;
+      }
+
+      // this must be a move within the same column
       const dbProject = await db.Project.findOneAndUpdate(
         {
           _id: req.params.id,
