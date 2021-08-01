@@ -2,7 +2,7 @@
   "name": "splat",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:6411/",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "axios": "^0.21.1",
@@ -17,7 +17,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "PORT=6410 craco start",
     "build": "craco build",
     "test": "craco test --env=jsdom",
     "eject": "react-scripts eject"

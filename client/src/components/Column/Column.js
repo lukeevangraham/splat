@@ -23,7 +23,7 @@ const Column = ({ column, issues, projectId, addIssue }) => {
   };
 
   return (
-    <div className="m-8 border-2">
+    <div className="m-2 border-2">
       <h3 className="p-2">{column.title}</h3>
       <Droppable droppableId={column.id}>
         {(provided) => (
