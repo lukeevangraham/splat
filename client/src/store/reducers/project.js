@@ -34,8 +34,6 @@ const sortPopulatedProject = (project) => {
   let doingCol = [];
   let doneCol = [];
 
-  console.log("REDUCER: ", project);
-
   project.column1Ids.forEach((issue) => {
     toDoCol.push(issue._id);
     objectOfIssues[issue._id] = issue;
@@ -77,15 +75,15 @@ const projectReducer = (state = initialState, action) => {
         issues: sortedProject.objectOfIssues,
         columns: {
           ...state.columns,
-          ["column-1"]: {
+          "column-1": {
             ...state.columns["column-1"],
             issueIds: sortedProject.toDoCol,
           },
-          ["column-2"]: {
+          "column-2": {
             ...state.columns["column-2"],
             issueIds: sortedProject.doingCol,
           },
-          ["column-3"]: {
+          "column-3": {
             ...state.columns["column-3"],
             issueIds: sortedProject.doneCol,
           },
@@ -98,15 +96,15 @@ const projectReducer = (state = initialState, action) => {
         issues: sortedProjectAfterIssueAdded.objectOfIssues,
         columns: {
           ...state.columns,
-          ["column-1"]: {
+          "column-1": {
             ...state.columns["column-1"],
             issueIds: sortedProjectAfterIssueAdded.toDoCol,
           },
-          ["column-2"]: {
+          "column-2": {
             ...state.columns["column-2"],
             issueIds: sortedProjectAfterIssueAdded.doingCol,
           },
-          ["column-3"]: {
+          "column-3": {
             ...state.columns["column-3"],
             issueIds: sortedProjectAfterIssueAdded.doneCol,
           },
