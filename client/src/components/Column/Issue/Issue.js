@@ -1,5 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { TrashIcon } from "@heroicons/react/outline";
 
 const Issue = ({ issue, index }) => (
   <Draggable draggableId={issue._id} index={index}>
@@ -8,9 +9,10 @@ const Issue = ({ issue, index }) => (
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
-        className="border-solid border-2 p-2 my-1.5 rounded bg-white"
+        className="border-solid border-1 p-1.5 my-1.5 rounded bg-white flex"
       >
-        {issue.summary}
+        <div className="flex-grow">{issue.summary}</div>
+        <TrashIcon className="h-5 w-5" />
       </div>
     )}
   </Draggable>

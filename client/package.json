@@ -5,6 +5,7 @@
   "proxy": "http://localhost:6411/",
   "dependencies": {
     "@craco/craco": "^6.1.2",
+    "@heroicons/react": "^1.0.3",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

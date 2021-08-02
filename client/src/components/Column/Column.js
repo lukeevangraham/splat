@@ -44,15 +44,16 @@ const Column = ({ column, issues, projectId, addIssue }) => {
                   id="newIssueSummary"
                   value={newIssueSummary}
                   onChange={(event) => inputChangedHandler(event)}
+                  className="p-1.5 w-full"
                 />
                 <div>
-                  <button>Add issue</button>
-                  <button>X</button>
+                  <button className="text-gray-600">Add issue</button>
+                  <button className="text-gray-600 ml-3">X</button>
                 </div>
               </form>
             ) : (
-              <div className="mt-4" onClick={() => setInputtingNewIssue(true)}>
-                Add another issue
+              <div className="my-3 mx-1.5 text-gray-600" onClick={() => setInputtingNewIssue(true)}>
+                + Add an issue
               </div>
             )}
           </div>
