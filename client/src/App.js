@@ -13,8 +13,12 @@ const App = () => {
     </Switch>
   );
   return (
-    <div>
-      <div>Splat!</div>
+    <div className="bg-blue-500 h-screen">
+      <div className="text-center text-2xl font-light bg-white bg-opacity-25 p-2.5 overflow-hidden mb-4">
+        <div className="transform -skew-y-6 m-1">
+          <span className="bg-white bg-opacity-70 p-1">Splat!</span>
+          </div>
+      </div>
       {routes}
     </div>
   );

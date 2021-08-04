@@ -73,13 +73,13 @@ const Project = ({
   };
 
   return (
-    <div>
-      <div>{currentProject.name}</div>
+    <div className="w-full m-auto md:w-11/12">
+      <div className="text-lg text-gray-100 m-2 font-semibold">{currentProject.name}</div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, 350px)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(325px, 1fr))",
           }}
         >
           {beautifulDNDData.columnOrder.map((columnId) => {
