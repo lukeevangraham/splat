@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
+import Modal from "../../components/UI/Modal/Modal";
 import {
   getProject,
   sameColUpdate,
@@ -17,9 +18,20 @@ const Project = ({
   currentProject,
   beautifulDNDData,
 }) => {
+
+const [editingIssue, setEditingIssue] = useState(false);
+
   useEffect(() => {
     getProject(match.params.id);
   }, [getProject, match.params.id]);
+
+  const editIssueHandler = () => {
+    setEditingIssue(true);
+  }
+
+  const editIssueCancelHandler = () => {
+    setEditingIssue(false)
+  }
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -73,6 +85,7 @@ const Project = ({
   };
 
   return (
+    <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
     <div className="w-full m-auto md:w-11/12">
       <div className="text-lg text-gray-100 m-2 font-semibold">{currentProject.name}</div>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -94,6 +107,7 @@ const Project = ({
                 column={column}
                 issues={issues}
                 projectId={currentProject._id}
+                editing={editIssueHandler}
               />
             );
           })}
@@ -101,6 +115,7 @@ const Project = ({
       </DragDropContext>
       {/* <IssueColumns project={currentProject} /> */}
     </div>
+    </Modal>
   );
 };
 

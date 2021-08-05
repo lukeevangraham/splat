@@ -4,7 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import Issue from "./Issue/Issue";
 import { addIssue } from "../../store/actions/project";
 
-const Column = ({ column, issues, projectId, addIssue }) => {
+const Column = ({ column, issues, projectId, addIssue, editing }) => {
   let [inputtingNewIssue, setInputtingNewIssue] = useState(false);
   let [newIssueSummary, setNewIssueSummary] = useState("");
 
@@ -33,7 +33,7 @@ const Column = ({ column, issues, projectId, addIssue }) => {
             className="px-2"
           >
             {issues.map((issue, index) => (
-              <Issue key={issue._id} issue={issue} index={index} />
+              <Issue key={issue._id} issue={issue} index={index} editing={editing} />
             ))}
             {provided.placeholder}
             {inputtingNewIssue ? (
