@@ -18,20 +18,19 @@ const Project = ({
   currentProject,
   beautifulDNDData,
 }) => {
-
-const [editingIssue, setEditingIssue] = useState(false);
+  const [editingIssue, setEditingIssue] = useState(null);
 
   useEffect(() => {
     getProject(match.params.id);
   }, [getProject, match.params.id]);
 
-  const editIssueHandler = () => {
-    setEditingIssue(true);
-  }
+  const editIssueHandler = (issue) => {
+    setEditingIssue(issue);
+  };
 
   const editIssueCancelHandler = () => {
-    setEditingIssue(false)
-  }
+    setEditingIssue(null);
+  };
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -85,37 +84,42 @@ const [editingIssue, setEditingIssue] = useState(false);
   };
 
   return (
-    <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
-    <div className="w-full m-auto md:w-11/12">
-      <div className="text-lg text-gray-100 m-2 font-semibold">{currentProject.name}</div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(325px, 1fr))",
-          }}
-        >
-          {beautifulDNDData.columnOrder.map((columnId) => {
-            const column = beautifulDNDData.columns[columnId];
-            const issues = column.issueIds.map(
-              (issueId) => beautifulDNDData.issues[issueId]
-            );
-
-            return (
-              <Column
-                key={column.id}
-                column={column}
-                issues={issues}
-                projectId={currentProject._id}
-                editing={editIssueHandler}
-              />
-            );
-          })}
+    <>
+      <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
+        {editingIssue ? editingIssue.summary : null}
+      </Modal>
+      <div className="w-full m-auto md:w-11/12">
+        <div className="text-lg text-gray-100 m-2 font-semibold">
+          {currentProject.name}
         </div>
-      </DragDropContext>
-      {/* <IssueColumns project={currentProject} /> */}
-    </div>
-    </Modal>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(325px, 1fr))",
+            }}
+          >
+            {beautifulDNDData.columnOrder.map((columnId) => {
+              const column = beautifulDNDData.columns[columnId];
+              const issues = column.issueIds.map(
+                (issueId) => beautifulDNDData.issues[issueId]
+              );
+
+              return (
+                <Column
+                  key={column.id}
+                  column={column}
+                  issues={issues}
+                  projectId={currentProject._id}
+                  editing={editIssueHandler}
+                />
+              );
+            })}
+          </div>
+        </DragDropContext>
+        {/* <IssueColumns project={currentProject} /> */}
+      </div>
+    </>
   );
 };
 

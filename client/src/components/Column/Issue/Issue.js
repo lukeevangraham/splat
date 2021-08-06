@@ -12,7 +12,7 @@ const Issue = ({ issue, index, editing }) => (
         className="border-solid border-1 p-1.5 my-1.5 rounded bg-white flex"
       >
         <div className="flex-grow">{issue.summary}</div>
-        <TrashIcon className="h-5 w-5" onClick={editing} />
+        <TrashIcon className="h-5 w-5" onClick={() => editing(issue)} />
       </div>
     )}
   </Draggable>
