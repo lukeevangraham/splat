@@ -33,6 +33,10 @@ const Project = ({
     setEditingIssue(null);
   };
 
+  const editIssueSubmission = (formValues) => {
+
+  }
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
