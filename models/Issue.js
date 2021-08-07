@@ -17,11 +17,11 @@ const IssueSchema = new Schema({
   teammates: Array,
   dateSubmitted: {
     type: Date,
-    defulat: Date.now,
+    default: Date.now,
   },
   lastUpdated: {
     type: Date,
-    defulat: Date.now,
+    default: Date.now,
   },
   notes: Array,
 });
