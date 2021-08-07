@@ -110,6 +110,12 @@ const projectReducer = (state = initialState, action) => {
           },
         },
       };
+      case actionTypes.UPDATE_ISSUE:
+        console.log("[project Reducer]: ", action.payload)
+        return {
+          ...state,
+          issues: {...state.issues, [action.payload.data._id]: action.payload.data}
+        }
     case actionTypes.SAME_COL_UPDATE:
       // console.log("[REDUCER Same COL]: ", action.payload);
       // console.log("RETURNING: ", {

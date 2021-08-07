@@ -2,11 +2,12 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Modal from "../../components/UI/Modal/Modal";
-import IssueDetail from "../../components/Column/Issue/IssueDetail/IssueDetail"
+import IssueDetail from "../../components/Column/Issue/IssueDetail/IssueDetail";
 import {
   getProject,
   sameColUpdate,
   diffColUpdate,
+  updateIssue,
 } from "../../store/actions/project";
 // import IssueColumns from "../../components/IssueColumns/IssueColumns";
 import Column from "../../components/Column/Column";
@@ -16,6 +17,7 @@ const Project = ({
   getProject,
   sameColUpdate,
   diffColUpdate,
+  updateIssue,
   currentProject,
   beautifulDNDData,
 }) => {
@@ -34,8 +36,9 @@ const Project = ({
   };
 
   const editIssueSubmission = (formValues) => {
-
-  }
+    updateIssue(editingIssue._id, formValues);
+    setEditingIssue(null)
+  };
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -91,7 +94,7 @@ const Project = ({
   return (
     <>
       <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
-        {editingIssue ? <IssueDetail issue={editingIssue} /> : null}
+        {editingIssue ? <IssueDetail issue={editingIssue} onSubmit={editIssueSubmission} /> : null}
       </Modal>
       <div className="w-full m-auto md:w-11/12">
         <div className="text-lg text-gray-100 m-2 font-semibold">
@@ -143,4 +146,5 @@ export default connect(mapStateToProps, {
   getProject,
   sameColUpdate,
   diffColUpdate,
+  updateIssue,
 })(Project);

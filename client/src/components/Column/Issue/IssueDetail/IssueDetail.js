@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Field } from "react-final-form";
 
-const IssueDetail = ({ issue }) => {
+const IssueDetail = ({ issue, onSubmit }) => {
   // let [summary, setSummary] = useState(issue.summary)
   // let [notes, setNotes] = useState(issue.notes)
 
@@ -9,24 +9,31 @@ const IssueDetail = ({ issue }) => {
     <div>
       <Form
         onSubmit={onSubmit}
-        validate={validate}
+        initialValues={{
+          summary: issue.summary
+        }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
+
+          <div>
+            <Field name="summary" component="input"  />
+          </div>
+
             <h2>Simple Default Input</h2>
             <div>
-              <label>First Name</label>
+              <label>Description</label>
               <Field
-                name="firstName"
+                name="description"
                 component="input"
-                placeholder="First Name"
+                placeholder="Description"
               />
             </div>
 
-            <h2>An Aribirary Reusable Input Component</h2>
+            {/* <h2>An Aribirary Reusable Input Component</h2>
             <div>
               <label>Interests</label>
               <Field name="interests" component={InterestPicker} />
-            </div>
+            </div> */}
 
             <h2>Render Function</h2>
             <Field
@@ -50,7 +57,7 @@ const IssueDetail = ({ issue }) => {
                 </div>
               )}
             </Field>
-            
+
             <button type="submit">Submit</button>
           </form>
         )}

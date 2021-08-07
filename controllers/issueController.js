@@ -18,7 +18,6 @@ module.exports = {
     }
   },
   update: async (req, res) => {
-    console.log("updating issue!!", req.params);
     try {
       const dbIssue = await db.Issue.findOneAndUpdate(
         { _id: req.params.id },

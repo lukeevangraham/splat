@@ -46,9 +46,10 @@ export const addIssue = (issueData, column) => async (dispatch) => {
   // dispatch({ type: actionTypes.GET_PROJECT, payload })
 };
 
-export const updateIssue = (issueData) => async (dispatch) => {
+export const updateIssue = (issueData, formValues) => async (dispatch) => {
   console.log("projectAction: ", issueData);
-  const response = await axios.put(`/api/issue${issueData._id}`);
+  console.log("values: ", formValues)
+  const response = await axios.put(`/api/issue/${issueData}`, formValues);
 
   dispatch({
     type: actionTypes.UPDATE_ISSUE,
