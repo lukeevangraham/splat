@@ -47,8 +47,6 @@ export const addIssue = (issueData, column) => async (dispatch) => {
 };
 
 export const updateIssue = (issueData, formValues) => async (dispatch) => {
-  console.log("projectAction: ", issueData);
-  console.log("values: ", formValues)
   const response = await axios.put(`/api/issue/${issueData}`, formValues);
 
   dispatch({

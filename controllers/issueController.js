@@ -11,7 +11,10 @@ module.exports = {
         req.body.issueData.projectId,
         { $push: { [colString]: dbIssue._id } },
         { new: true }
-      ).populate("column1Ids").populate("column2Ids").populate("column3Ids");;
+      )
+        .populate("column1Ids")
+        .populate("column2Ids")
+        .populate("column3Ids");
       res.json(dbProject);
     } catch (e) {
       console.log("[issueController]: ", e);

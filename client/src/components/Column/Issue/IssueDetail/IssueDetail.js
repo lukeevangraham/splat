@@ -10,14 +10,13 @@ const IssueDetail = ({ issue, onSubmit }) => {
       <Form
         onSubmit={onSubmit}
         initialValues={{
-          summary: issue.summary
+          summary: issue.summary,
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-
-          <div>
-            <Field name="summary" component="input"  />
-          </div>
+            <div>
+              <Field name="summary" component="input" />
+            </div>
 
             <h2>Simple Default Input</h2>
             <div>

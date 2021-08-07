@@ -37,7 +37,7 @@ const Project = ({
 
   const editIssueSubmission = (formValues) => {
     updateIssue(editingIssue._id, formValues);
-    setEditingIssue(null)
+    setEditingIssue(null);
   };
 
   const onDragEnd = (result) => {
@@ -94,7 +94,9 @@ const Project = ({
   return (
     <>
       <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
-        {editingIssue ? <IssueDetail issue={editingIssue} onSubmit={editIssueSubmission} /> : null}
+        {editingIssue ? (
+          <IssueDetail issue={editingIssue} onSubmit={editIssueSubmission} />
+        ) : null}
       </Modal>
       <div className="w-full m-auto md:w-11/12">
         <div className="text-lg text-gray-100 m-2 font-semibold">
