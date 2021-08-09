@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Link } from "react-router-dom";
 import Projects from "./containers/Projects/Projects";
 import Project from "./containers/Project/Project";
 
@@ -16,8 +16,10 @@ const App = () => {
     <div className="bg-blue-500 h-screen">
       <div className="text-center text-2xl font-light bg-white bg-opacity-25 p-2.5 overflow-hidden mb-4">
         <div className="transform -skew-y-6 m-1">
-          <span className="bg-white bg-opacity-70 p-1">Splat!</span>
-          </div>
+          <Link to="/">
+            <span className="bg-white bg-opacity-70 p-1">Splat!</span>
+          </Link>
+        </div>
       </div>
       {routes}
     </div>
