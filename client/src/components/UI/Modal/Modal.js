@@ -11,7 +11,7 @@ const Modal = ({ show, modalClosed, children }) => (
         opacity: show ? `1` : `0`,
       }}
     >
-      <h2>{children}</h2>
+      {children}
     </div>
   </>
 );
