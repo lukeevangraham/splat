@@ -95,7 +95,7 @@ const Project = ({
     <>
       <Modal show={editingIssue} modalClosed={editIssueCancelHandler}>
         {editingIssue ? (
-          <IssueDetail issue={editingIssue} onSubmit={editIssueSubmission} />
+          <IssueDetail issue={editingIssue} onSubmit={editIssueSubmission} cancelModal={editIssueCancelHandler} />
         ) : null}
       </Modal>
       <div className="w-full m-auto md:w-11/12">
