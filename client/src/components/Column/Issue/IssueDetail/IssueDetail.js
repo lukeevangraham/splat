@@ -56,7 +56,7 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
               />
             </label>
 
-            <label className="block">
+            {/* <label className="block">
               <span className="text-gray-700">Priority</span>
               <Field
                 name="priority"
@@ -69,7 +69,7 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </Field>
-            </label>
+            </label> */}
 
             <button
               type="submit"
