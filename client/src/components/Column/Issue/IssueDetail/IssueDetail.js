@@ -13,20 +13,20 @@ const IssueDetail = ({ issue, onSubmit }) => {
           summary: issue.summary,
         }}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
             <div>
               <Field name="summary" component="input" />
             </div>
 
-            <h2>Simple Default Input</h2>
-            <div>
-              <label>Description</label>
+            <label className="block">
+              <span className="text-gray-700">Description</span>
               <Field
                 name="description"
                 component="input"
                 placeholder="Description"
+                className="mt-1 block w-full"
               />
-            </div>
+            </label>
 
             {/* <h2>An Aribirary Reusable Input Component</h2>
             <div>

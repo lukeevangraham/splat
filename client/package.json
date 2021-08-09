@@ -6,6 +6,7 @@
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@heroicons/react": "^1.0.3",
+    "@tailwindcss/forms": "^0.3.3",
     "axios": "^0.21.1",
     "final-form": "^4.20.2",
     "react": "^17.0.2",
