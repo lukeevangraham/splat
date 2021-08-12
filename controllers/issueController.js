@@ -32,4 +32,12 @@ module.exports = {
       console.log("[issueController]: ", e);
     }
   },
+  delete: async (req, rex) => {
+    try {
+      const dbIssue = await db.Issue.remove({ _id: req.params.id });
+      res.json(dbIssue);
+    } catch (e) {
+      console.log("[issueController]: ", e);
+    }
+  },
 };

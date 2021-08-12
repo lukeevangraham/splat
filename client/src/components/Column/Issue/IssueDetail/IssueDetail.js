@@ -1,9 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
+import { TrashIcon } from "@heroicons/react/outline";
+import { deleteIssue } from "../../../../store/actions/project";
 
-const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
+const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
   // let [summary, setSummary] = useState(issue.summary)
   // let [notes, setNotes] = useState(issue.notes)
+
+  const deleteHandler = () => {
+    cancelModal();
+    deleteIssue(issue._id);
+    console.log("CLOSE TIME");
+  };
 
   return (
     <div>
@@ -16,7 +25,12 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-            <label style={{ display: "grid", gridTemplateColumns: "minmax(100px, 1fr) minmax(8px, 40px)" }}>
+            <label
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(100px, 1fr) minmax(8px, 40px)",
+              }}
+            >
               {/* <span className="text-gray-700">Issue Summary</span> */}
               <Field
                 name="summary"
@@ -71,12 +85,20 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
               </Field>
             </label> */}
 
-            <button
-              type="submit"
-              className="w-2/5 bg-blue-500 hover:bg-blue-700 text-white fold-bold py-2 px-4 rounded"
-            >
-              Submit
-            </button>
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                className="w-2/5 bg-blue-500 hover:bg-blue-700 text-white fold-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+              <div
+                className="bg-red-500 py-2 px-4 text-white rounded cursor-pointer hover:bg-red-600"
+                onClick={() => deleteHandler()}
+              >
+                <TrashIcon className="h-5 w-5" />
+              </div>
+            </div>
           </form>
         )}
       />
@@ -85,4 +107,4 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
   );
 };
 
-export default IssueDetail;
+export default connect(null, { deleteIssue })(IssueDetail);
