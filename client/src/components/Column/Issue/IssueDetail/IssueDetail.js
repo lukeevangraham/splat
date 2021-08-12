@@ -16,16 +16,16 @@ const IssueDetail = ({ issue, onSubmit, cancelModal }) => {
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-            <label className="flex items-center flex-wrap-reverse">
+            <label style={{ display: "grid", gridTemplateColumns: "minmax(100px, 1fr) minmax(8px, 40px)" }}>
               {/* <span className="text-gray-700">Issue Summary</span> */}
               <Field
                 name="summary"
                 component="input"
                 type="text"
-                className="flex-grow mt-1 mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 font-bold"
+                className="mt-1 mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 font-bold"
               />
               <div
-                className="mt-1 p-2 rounded-md hover:bg-gray-200 cursor-pointer"
+                className="mt-1 rounded-md hover:bg-gray-200 cursor-pointer flex items-center justify-center"
                 onClick={cancelModal}
               >
                 <svg
