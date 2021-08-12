@@ -36,7 +36,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
   );
 
   return (
-    <div className="bg-red-400 w-9/12 grid grid-cols-2 p-3">
+    <div className="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg w-9/12 grid grid-cols-2 p-3 mx-auto rounded">
       <div className="text-4xl mb-4">Projects</div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
