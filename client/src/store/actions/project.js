@@ -56,10 +56,10 @@ export const updateIssue = (issueData, formValues) => async (dispatch) => {
 };
 
 export const deleteIssue = (issueId) => async (dispatch) => {
-  const response = await axios.delete(`/api/issue/${issueId}`);
+  await axios.delete(`/api/issue/${issueId}`);
 
   dispatch({
     type: actionTypes.DELETE_ISSUE,
-    payload: response,
+    payload: issueId,
   });
 };
