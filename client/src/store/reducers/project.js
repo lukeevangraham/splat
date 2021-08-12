@@ -118,14 +118,31 @@ const projectReducer = (state = initialState, action) => {
           [action.payload.data._id]: action.payload.data,
         },
       };
-      case actionTypes.DELETE_ISSUE:
-        console.log("PAYLOAD: ", action.payload)
-        return {
-          ...state,
-          // issue: {
-          //   ...state.issues.filter(),
-          // }
-        }
+    case actionTypes.DELETE_ISSUE:
+      return {
+        ...state,
+        columns: {
+          ...state.columns,
+          "column-1": {
+            ...state.columns["column-1"],
+            issueIds: state.columns["column-1"].issueIds.filter(
+              (id) => id !== action.payload
+            ),
+          },
+          "column-2": {
+            ...state.columns["column-2"],
+            issueIds: state.columns["column-2"].issueIds.filter(
+              (id) => id !== action.payload
+            ),
+          },
+          "column-3": {
+            ...state.columns["column-3"],
+            issueIds: state.columns["column-3"].issueIds.filter(
+              (id) => id !== action.payload
+            ),
+          },
+        },
+      };
     case actionTypes.SAME_COL_UPDATE:
       // console.log("[REDUCER Same COL]: ", action.payload);
       // console.log("RETURNING: ", {
