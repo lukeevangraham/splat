@@ -47,7 +47,7 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
                   autoFocus
                   value={newIssueSummary}
                   onChange={(event) => inputChangedHandler(event)}
-                  className="p-1.5 w-full"
+                  className="p-1.5 w-full rounded"
                 />
                 <div className="flex items-center mt-1">
                   <button className="bg-blue-500 py-1 px-4 rounded text-gray-100">Add issue</button>
