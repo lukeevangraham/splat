@@ -13,7 +13,7 @@ const App = () => {
     </Switch>
   );
   return (
-    <div className="bg-blue-500 h-screen">
+    <div className="h-screen">
       <div className="text-center text-2xl font-light bg-white bg-opacity-25 p-2.5 overflow-hidden mb-4">
         <div className="transform -skew-y-6 m-1">
           <Link to="/">

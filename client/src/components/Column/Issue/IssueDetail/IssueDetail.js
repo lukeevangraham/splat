@@ -11,7 +11,6 @@ const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
   const deleteHandler = () => {
     cancelModal();
     deleteIssue(issue._id);
-    console.log("CLOSE TIME");
   };
 
   return (
@@ -85,7 +84,7 @@ const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
               </Field>
             </label> */}
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <button
                 type="submit"
                 className="w-2/5 bg-blue-500 hover:bg-blue-700 text-white fold-bold py-2 px-4 rounded"
@@ -93,7 +92,7 @@ const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
                 Submit
               </button>
               <div
-                className="bg-red-500 py-2 px-4 text-white rounded cursor-pointer hover:bg-red-600"
+                className="bg-red-500 py-2 px-3 text-white rounded cursor-pointer hover:bg-red-600"
                 onClick={() => deleteHandler()}
               >
                 <TrashIcon className="h-5 w-5" />
