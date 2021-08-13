@@ -24,7 +24,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
   };
 
   let createProject = (
-    <form onSubmit={onSubmit} className="col-span-full mb-3 flex items-center">
+    <form onSubmit={onSubmit} className="col-span-full mb-3 flex items-center flex-col md:flex-row">
       <input
         type="text"
         name="newProjectName"
@@ -35,6 +35,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
         value={newProjectName}
         onChange={(event) => inputChangedHandler(event)}
       />
+      <div className="flex mt-1 items-center">
       <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
         Add Project
       </button>
@@ -43,6 +44,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
         onClick={() => (setNewProjectName(""), setCreatingProject(false))}
       >
         <XIcon className="h-5 w-5" />
+      </div>
       </div>
     </form>
   );
