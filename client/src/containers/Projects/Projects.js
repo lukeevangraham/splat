@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { XIcon } from "@heroicons/react/outline";
 import { addProject, getProjects } from "../../store/actions";
 
 const Projects = ({ addProject, getProjects, projects }) => {
@@ -23,15 +24,26 @@ const Projects = ({ addProject, getProjects, projects }) => {
   };
 
   let createProject = (
-    <form onSubmit={onSubmit} className="col-span-full">
+    <form onSubmit={onSubmit} className="col-span-full mb-3 flex items-center">
       <input
         type="text"
         name="newProjectName"
         id="newProjectName"
+        placeholder="Enter a project name"
+        className="p-1.5 w-full md:w-2/4 md:mr-3 rounded"
+        autoFocus
         value={newProjectName}
         onChange={(event) => inputChangedHandler(event)}
       />
-      <button>Add Project</button>
+      <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
+        Add Project
+      </button>
+      <div
+        className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
+        onClick={() => (setNewProjectName(""), setCreatingProject(false))}
+      >
+        <XIcon className="h-5 w-5" />
+      </div>
     </form>
   );
 
@@ -40,7 +52,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
       <div className="text-4xl mb-4">Projects</div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6  mb-4 col-start-2 justify-self-end self-center"
+        className="h-6 w-6 mb-4 col-start-2 justify-self-end self-center cursor-pointer"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

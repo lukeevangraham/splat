@@ -15,10 +15,13 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addIssue({
-      summary: newIssueSummary,
-      projectId: projectId,
-    }, column.id);
+    addIssue(
+      {
+        summary: newIssueSummary,
+        projectId: projectId,
+      },
+      column.id
+    );
     setNewIssueSummary("");
     setInputtingNewIssue(false);
   };
@@ -34,7 +37,12 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
             className="px-2"
           >
             {issues.map((issue, index) => (
-              <Issue key={issue._id} issue={issue} index={index} editing={editing} />
+              <Issue
+                key={issue._id}
+                issue={issue}
+                index={index}
+                editing={editing}
+              />
             ))}
             {provided.placeholder}
             {inputtingNewIssue ? (
@@ -50,12 +58,22 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
                   className="p-1.5 w-full rounded"
                 />
                 <div className="flex items-center mt-1">
-                  <button className="bg-blue-500 py-1 px-4 rounded text-gray-100">Add issue</button>
-                  <button className="text-gray-600 ml-3 hover:text-gray-900 py-1"><XIcon className="h-5 w-5" /></button>
+                  <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
+                    Add issue
+                  </button>
+                  <div
+                    className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
+                    onClick={() => (setInputtingNewIssue(false), setNewIssueSummary(""))}
+                  >
+                    <XIcon className="h-5 w-5" />
+                  </div>
                 </div>
               </form>
             ) : (
-              <div className="my-3 mx-1.5 text-gray-600 cursor-pointer" onClick={() => setInputtingNewIssue(true)}>
+              <div
+                className="my-3 mx-1.5 text-gray-600 cursor-pointer"
+                onClick={() => setInputtingNewIssue(true)}
+              >
                 + Add an issue
               </div>
             )}
