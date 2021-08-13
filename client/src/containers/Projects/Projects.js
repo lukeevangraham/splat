@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import { XIcon } from "@heroicons/react/outline";
 import { addProject, getProjects } from "../../store/actions";
 
@@ -24,7 +25,10 @@ const Projects = ({ addProject, getProjects, projects }) => {
   };
 
   let createProject = (
-    <form onSubmit={onSubmit} className="col-span-full mb-3 flex items-center flex-col md:flex-row">
+    <form
+      onSubmit={onSubmit}
+      className="col-span-full mb-3 flex items-center flex-col md:flex-row"
+    >
       <input
         type="text"
         name="newProjectName"
@@ -36,15 +40,15 @@ const Projects = ({ addProject, getProjects, projects }) => {
         onChange={(event) => inputChangedHandler(event)}
       />
       <div className="flex mt-1 items-center">
-      <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
-        Add Project
-      </button>
-      <div
-        className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
-        onClick={() => (setNewProjectName(""), setCreatingProject(false))}
-      >
-        <XIcon className="h-5 w-5" />
-      </div>
+        <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
+          Add Project
+        </button>
+        <div
+          className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
+          onClick={() => (setNewProjectName(""), setCreatingProject(false))}
+        >
+          <XIcon className="h-5 w-5" />
+        </div>
       </div>
     </form>
   );
@@ -75,7 +79,7 @@ const Projects = ({ addProject, getProjects, projects }) => {
                 <Link to={`/project/${project._id}`}>{project.name}</Link>
               </li>
             ))
-          : null}
+          : <Spinner />}
       </ul>
     </div>
   );
