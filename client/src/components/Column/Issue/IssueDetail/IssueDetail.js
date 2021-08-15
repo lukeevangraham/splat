@@ -14,7 +14,7 @@ const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <Form
         onSubmit={onSubmit}
         initialValues={{
