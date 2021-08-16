@@ -32,6 +32,23 @@ module.exports = {
   },
   put: async (req, res) => {
     try {
+      // if this is related to renaming a project
+      if (req.body.name) {
+        const dbProject = await db.Project.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            $set: {
+              name: req.body.project.name,
+            },
+          },
+          { new: true }
+        );
+        res.json(dbProject);
+        return;
+      }
+
       // determine if this a move between DND Columns
       if (req.body.newStart) {
         const dbProject = await db.Project.findOneAndUpdate(

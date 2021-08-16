@@ -22,6 +22,12 @@ export const getProject = (id) => async (dispatch) => {
   dispatch({ type: actionTypes.GET_PROJECT, payload: response.data });
 };
 
+export const updateProject = (project) => async (dispatch) => {
+  const response = await axios.put(`/api/project/${project._id}`, { name: true, project });
+
+  dispatch({ type: actionTypes.UPDATE_PROJECT, payload: project });
+};
+
 export const sameColUpdate = (colData, id) => async (dispatch) => {
   // const responseCol = await axios.put(`/api/project/${id}`, colData);
   axios.put(`/api/project/${id}`, colData);

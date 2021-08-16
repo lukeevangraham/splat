@@ -4,23 +4,23 @@ import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Modal from "../../components/UI/Modal/Modal";
 import { XIcon, TrashIcon, PencilIcon } from "@heroicons/react/outline";
-import { addProject, getProjects } from "../../store/actions";
+import { addProject, getProjects, updateProject } from "../../store/actions";
 
-const Projects = ({ addProject, getProjects, projects }) => {
+const Projects = ({ addProject, getProjects, updateProject, projects }) => {
   useEffect(() => {
     getProjects();
   }, [getProjects]);
 
   let [newProjectName, setNewProjectName] = useState("");
   let [creatingProject, setCreatingProject] = useState(false);
-  let [confirmDelete, setConfirmDelete] = useState(null);
-
-  const unconfirmDelete = () => {
-    setConfirmDelete(false);
-  };
+  let [editingProject, setEditingProject] = useState(null);
 
   const inputChangedHandler = (event) => {
     setNewProjectName(event.target.value);
+  };
+
+  const editInputChangedHandler = (event) => {
+    setEditingProject({ ...editingProject, name: event.target.value });
   };
 
   const onSubmit = (event) => {
@@ -29,6 +29,18 @@ const Projects = ({ addProject, getProjects, projects }) => {
     setNewProjectName("");
     setCreatingProject(false);
   };
+
+  const renderLinkName = (project) => (
+    <>
+      <Link to={`/project/${project._id}`} className="pr-9">
+        {project.name}
+      </Link>
+      <PencilIcon
+        onClick={() => setEditingProject(project)}
+        className="h-5 w-5 mr-2 cursor-pointer"
+      />
+    </>
+  );
 
   let createProject = (
     <form
@@ -61,25 +73,6 @@ const Projects = ({ addProject, getProjects, projects }) => {
 
   return (
     <>
-      <Modal show={confirmDelete} modalClosed={unconfirmDelete}>
-        {confirmDelete ? (
-          <div className="text-center h-full w-full flex items-center">
-            <div className="w-full">
-              You're about to delete the project: <br />{" "}
-              <div className="text-xl mt-4">{confirmDelete.name}</div>
-              {console.log("HERE: ", confirmDelete)}
-              <div className="mt-4 flex content-center w-44 m-auto items-center">
-                <div className="flex-grow-0 bg-red-500 hover:bg-red-600 m-auto py-2 px-3 rounded text-white cursor-pointer">
-                  Confirm
-                </div>
-                <div onClick={() => unconfirmDelete()} className="flex-grow-0 border-2 border-gray-500 hover:bg-gray-100 m-auto py-1.5 px-3 rounded cursor-pointer">
-                  Back
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
-      </Modal>
       <div className="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg w-9/12 grid grid-cols-2 p-3 mx-auto rounded">
         <div className="text-4xl mb-4">Projects</div>
         <svg
@@ -98,22 +91,57 @@ const Projects = ({ addProject, getProjects, projects }) => {
           />
         </svg>
         {creatingProject ? createProject : null}
-        <ul>
+        <ul className="col-span-full">
           {projects.length > 0 ? (
             projects.map((project, index) => (
-              <li key={project._id} className="flex m-1">
-                <Link to={`/project/${project._id}`} className="pr-9">
+              <li key={project._id} className="flex m-1 items-center">
+                {editingProject ? (
+                  editingProject._id === project._id ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editingProject.name}
+                        onChange={(event) => editInputChangedHandler(event)}
+                        className="p-1 mr-3 rounded"
+                        autoFocus
+                      />
+                      <button
+                        onClick={() => (
+                          updateProject(editingProject), setEditingProject(null)
+                        )}
+                        className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600"
+                      >
+                        Update Project
+                      </button>
+                      <div
+                        className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
+                        onClick={() => setEditingProject(false)}
+                      >
+                        <XIcon className="h-5 w-5" />
+                      </div>
+                    </>
+                  ) : (
+                    // console.log("HERE: ", editingProject)
+                    renderLinkName(project)
+                  )
+                ) : (
+                  renderLinkName(project)
+                )}
+                {/* <Link to={`/project/${project._id}`} className="pr-9">
                   {project.name}
-                </Link>
-                <PencilIcon className="h-5 w-5 mr-2 cursor-pointer" />
-                <TrashIcon
+                </Link> */}
+
+                {/* <TrashIcon
                   className="h-5 w-5 cursor-pointer"
                   onClick={() => setConfirmDelete(project)}
-                />
+                /> */}
               </li>
             ))
           ) : (
-            <Spinner />
+            <div className="p-36 text-center">
+              No projects avaiable. Click on the the folder above to create a
+              project.
+            </div>
           )}
         </ul>
       </div>
@@ -127,4 +155,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addProject, getProjects })(Projects);
+export default connect(mapStateToProps, {
+  addProject,
+  getProjects,
+  updateProject,
+})(Projects);

@@ -89,6 +89,15 @@ const projectReducer = (state = initialState, action) => {
           },
         },
       };
+    case actionTypes.UPDATE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.map((project) =>
+          project._id === action.payload._id
+            ? { ...project, name: action.payload.name }
+            : project
+        ),
+      };
     case actionTypes.ADD_ISSUE:
       const sortedProjectAfterIssueAdded = sortPopulatedProject(action.payload);
       return {
