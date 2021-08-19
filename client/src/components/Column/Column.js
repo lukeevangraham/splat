@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import Issue from "./Issue/Issue";
+import Button from "../UI/Button/Button";
 import { XIcon } from "@heroicons/react/outline";
 import { addIssue } from "../../store/actions/project";
 
@@ -11,6 +12,11 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
 
   const inputChangedHandler = (event) => {
     setNewIssueSummary(event.target.value);
+  };
+
+  const cancelNewIssueInput = () => {
+    setInputtingNewIssue(false);
+    setNewIssueSummary("");
   };
 
   const onSubmit = (event) => {
@@ -46,7 +52,7 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
             ))}
             {provided.placeholder}
             {inputtingNewIssue ? (
-              <form onSubmit={onSubmit}>
+              <form onSubmit={onSubmit} className="my-3">
                 <input
                   type="text"
                   name="newIssueSummary"
@@ -58,12 +64,10 @@ const Column = ({ column, issues, projectId, addIssue, editing }) => {
                   className="p-1.5 w-full rounded"
                 />
                 <div className="flex items-center mt-1">
-                  <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
-                    Add issue
-                  </button>
+                  <Button clicked={onSubmit}>Add issue</Button>
                   <div
                     className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
-                    onClick={() => (setInputtingNewIssue(false), setNewIssueSummary(""))}
+                    onClick={cancelNewIssueInput}
                   >
                     <XIcon className="h-5 w-5" />
                   </div>

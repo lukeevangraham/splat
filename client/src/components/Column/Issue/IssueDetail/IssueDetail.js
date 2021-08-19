@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import { TrashIcon } from "@heroicons/react/outline";
 import { deleteIssue } from "../../../../store/actions/project";
+import Button from "../../../UI/Button/Button"
 
 const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
   // let [summary, setSummary] = useState(issue.summary)
@@ -85,12 +86,13 @@ const IssueDetail = ({ issue, onSubmit, cancelModal, deleteIssue }) => {
             </label> */}
 
             <div className="flex justify-between items-center">
-              <button
+              <Button clicked={handleSubmit}>Submit</Button>
+              {/* <button
                 type="submit"
                 className="w-2/5 bg-blue-500 hover:bg-blue-700 text-white fold-bold py-2 px-4 rounded"
               >
                 Submit
-              </button>
+              </button> */}
               <div
                 className="bg-red-500 py-2 px-3 text-white rounded cursor-pointer hover:bg-red-600"
                 onClick={() => deleteHandler()}

@@ -23,7 +23,7 @@ export const getProject = (id) => async (dispatch) => {
 };
 
 export const updateProject = (project) => async (dispatch) => {
-  const response = await axios.put(`/api/project/${project._id}`, { name: true, project });
+  axios.put(`/api/project/${project._id}`, { name: true, project });
 
   dispatch({ type: actionTypes.UPDATE_PROJECT, payload: project });
 };

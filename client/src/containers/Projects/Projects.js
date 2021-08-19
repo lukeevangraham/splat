@@ -1,36 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import Modal from "../../components/UI/Modal/Modal";
-import { XIcon, TrashIcon, PencilIcon } from "@heroicons/react/outline";
+import { PencilIcon } from "@heroicons/react/outline";
 import { addProject, getProjects, updateProject } from "../../store/actions";
+import ProjectForm from "../../components/ProjectForm/ProjectForm";
 
 const Projects = ({ addProject, getProjects, updateProject, projects }) => {
-  useEffect(() => {
-    getProjects();
-  }, [getProjects]);
-
   let [newProjectName, setNewProjectName] = useState("");
   let [creatingProject, setCreatingProject] = useState(false);
   let [editingProject, setEditingProject] = useState(null);
 
-  const inputChangedHandler = (event) => {
+  useEffect(() => {
+    getProjects();
+  }, [getProjects]);
+
+  const newInputChangedHandler = (event) => {
     setNewProjectName(event.target.value);
+  };
+
+  const newProjectCancelHandler = () => {
+    setNewProjectName("");
+    setCreatingProject(false);
   };
 
   const editInputChangedHandler = (event) => {
     setEditingProject({ ...editingProject, name: event.target.value });
   };
 
-  const onSubmit = (event) => {
+  const onAddProjectSubmit = (event) => {
     event.preventDefault();
     addProject({ name: newProjectName });
     setNewProjectName("");
     setCreatingProject(false);
   };
 
-  const renderLinkName = (project) => (
+  const onEditProjectSubmit = (event) => {
+    event.preventDefault();
+    updateProject(editingProject);
+    setEditingProject(null);
+  };
+
+  const renderProjectName = (project) => (
     <>
       <Link to={`/project/${project._id}`} className="pr-9">
         {project.name}
@@ -40,35 +50,6 @@ const Projects = ({ addProject, getProjects, updateProject, projects }) => {
         className="h-5 w-5 mr-2 cursor-pointer"
       />
     </>
-  );
-
-  let createProject = (
-    <form
-      onSubmit={onSubmit}
-      className="col-span-full mb-3 flex items-center flex-col md:flex-row"
-    >
-      <input
-        type="text"
-        name="newProjectName"
-        id="newProjectName"
-        placeholder="Enter a project name"
-        className="p-1.5 w-full md:w-2/4 md:mr-3 rounded"
-        autoFocus
-        value={newProjectName}
-        onChange={(event) => inputChangedHandler(event)}
-      />
-      <div className="flex mt-1 items-center">
-        <button className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600">
-          Add Project
-        </button>
-        <div
-          className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
-          onClick={() => (setNewProjectName(""), setCreatingProject(false))}
-        >
-          <XIcon className="h-5 w-5" />
-        </div>
-      </div>
-    </form>
   );
 
   return (
@@ -90,51 +71,41 @@ const Projects = ({ addProject, getProjects, updateProject, projects }) => {
             d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
           />
         </svg>
-        {creatingProject ? createProject : null}
+        {creatingProject ? (
+          <ProjectForm
+            onSubmit={onAddProjectSubmit}
+            value={newProjectName}
+            onChange={newInputChangedHandler}
+            onCancel={newProjectCancelHandler}
+            name="newProjectName"
+            placeholder="Enter a project name"
+            submitButtonText="Add project"
+          />
+        ) : null}
         <ul className="col-span-full">
           {projects.length > 0 ? (
             projects.map((project, index) => (
               <li key={project._id} className="flex m-1 items-center">
+                {/* if we're editing a project name and iterating over that Name */}
+                {/* Hence the nester ternary statement */}
                 {editingProject ? (
                   editingProject._id === project._id ? (
-                    <>
-                      <input
-                        type="text"
-                        value={editingProject.name}
-                        onChange={(event) => editInputChangedHandler(event)}
-                        className="p-1 mr-3 rounded"
-                        autoFocus
-                      />
-                      <button
-                        onClick={() => (
-                          updateProject(editingProject), setEditingProject(null)
-                        )}
-                        className="bg-blue-500 py-1 px-4 rounded text-gray-100 hover:bg-blue-600"
-                      >
-                        Update Project
-                      </button>
-                      <div
-                        className="text-gray-600 ml-3 hover:text-gray-900 py-1 cursor-pointer"
-                        onClick={() => setEditingProject(false)}
-                      >
-                        <XIcon className="h-5 w-5" />
-                      </div>
-                    </>
+                    <ProjectForm
+                      onSubmit={onEditProjectSubmit}
+                      value={editingProject.name}
+                      onChange={editInputChangedHandler}
+                      onCancel={() => setEditingProject(false)}
+                      name="editProjectName"
+                      placeholder="Enter a project name"
+                      submitButtonText="Update Project"
+                    />
                   ) : (
-                    // console.log("HERE: ", editingProject)
-                    renderLinkName(project)
+                    // otherwise just render the names
+                    renderProjectName(project)
                   )
                 ) : (
-                  renderLinkName(project)
+                  renderProjectName(project)
                 )}
-                {/* <Link to={`/project/${project._id}`} className="pr-9">
-                  {project.name}
-                </Link> */}
-
-                {/* <TrashIcon
-                  className="h-5 w-5 cursor-pointer"
-                  onClick={() => setConfirmDelete(project)}
-                /> */}
               </li>
             ))
           ) : (
