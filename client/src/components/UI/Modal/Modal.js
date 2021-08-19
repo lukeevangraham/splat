@@ -4,14 +4,18 @@ import Backdrop from "../Backdrop/Backdrop";
 const Modal = ({ show, modalClosed, children }) => (
   <>
     <Backdrop show={show} clicked={modalClosed} />
-    <div
-      className="fixed z-50 bg-white w-4/6 h-4/6 shadow p-6 inset-0 m-auto rounded-xl transition-all duration-300 flex items-center"
-      style={{
-        transform: show ? `translateY(0)` : `translateY(-100vh)`,
-        opacity: show ? `1` : `0`,
-      }}
-    >
-      {children}
+    <div className="fixed inset-0 h-full w-full flex flex-col z-50 transition-all duration-300 items-center" style={{
+          transform: show ? `translateY(0)` : `translateY(-100vh)`,
+          opacity: show ? `1` : `0`,
+        }}>
+      <div className="flex-grow"></div>
+      <div
+        className="flex-grow-0 bg-white w-4/6 shadow p-6 rounded-xl flex items-center"
+        
+      >
+        {children}
+      </div>
+      <div className="flex-grow"></div>
     </div>
   </>
 );
