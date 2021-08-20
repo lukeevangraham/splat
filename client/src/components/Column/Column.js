@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import Issue from "./Issue/Issue";
@@ -9,6 +9,18 @@ import { addIssue } from "../../store/actions/project";
 const Column = ({ column, issues, projectId, addIssue, editing }) => {
   let [inputtingNewIssue, setInputtingNewIssue] = useState(false);
   let [newIssueSummary, setNewIssueSummary] = useState("");
+
+  // Setting up the escape key to close input form
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        setInputtingNewIssue(false);
+        setNewIssueSummary("");
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [setInputtingNewIssue, setNewIssueSummary]);
 
   const inputChangedHandler = (event) => {
     setNewIssueSummary(event.target.value);
