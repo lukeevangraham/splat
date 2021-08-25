@@ -1,29 +1,33 @@
-# Create React Express App
+# Splat
 
-## About This Boilerplate
+## Overview
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+Splat is a bug-tracker app.  It provides a way to track issues/bugs related to projects and monitor progress as they are addressed.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+Deployed at https://splat.lukegraham.us
 
-## Starting the app locally
+![Home](./readme-images/splat-home.png)
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+Splat was built with React, Redux, Tailwind, Mongo, React-Beautiful-DND, Node.js and Express.
 
-```
-npm install
-```
+## Views
 
-This should install node modules within the server and the client folder.
+### Projects
 
-After both installations complete, run the following command in your terminal:
+Before bugs and issues can be tracked they must be associated with a project.  Create a new project with the + button in the top right of the Projects screen.  Existing Project names can be edited by clicking on their pencil icon.  Clicking on the existing project to work with it's issues
 
-```
-npm start
-```
+![Home](./readme-images/projects.png)
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+### Project
 
-## Deployment (Heroku)
+The project page contains three columns: To Do, Doing and Done.  Issues can be added to each column.  Then the issues can be clicked and dragged around eachother and onto the different columns.
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+![Home](./readme-images/project.png)
+
+Clicking on an issue's pencil icon loads the Edit popup.
+
+### Issue Popup
+
+From the Issue Popup the issue summary can be edited.  A description can be added.  The issue can also be deleted.
+
+![Home](./readme-images/popup.png)
